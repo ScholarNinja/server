@@ -1,0 +1,13 @@
+{
+  "name": "scholarninja-server",
+  "version": "0.0.1",
+  "dependencies": {
+    "peer": "*"
+  },
+  "devDependencies": {
+    "browserify": "*"
+  },
+  "engines": {
+    "node": ">=0.8.0"
+  }
+}
