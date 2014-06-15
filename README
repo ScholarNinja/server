@@ -1,6 +1,22 @@
+# Install node
+
 wget http://nodejs.org/dist/v0.10.28/node-v0.10.28.tar.gz
 tar -zxvf node-v0.10.28.tar.gz
 cd node-v0.10.28
 yum groupinstall "Development Tools"
 yum install make
 sudo make install
+
+
+# Install STUN/TURN
+https://code.google.com/p/rfc5766-turn-server/ (using AMI image)
+
+Open ports in Security group:
+TCP 443
+TCP 3478-3479
+TCP 32355-65535
+UDP 3478-3479
+UDP 32355-65535
+
+Launch with:
+sudo turnserver --syslog -a -L ‘amazon ec2 PRIVATE ip address’ -X ‘amazon ec2 PUBLIC ip address’ -E ‘amazon ec2 PRIVATE ip address’ -f --min-rt=32355 --max-port=65535 --user=’my_username’:’my_password’ -r realm --log-file=stdout -v

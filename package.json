@@ -2,7 +2,7 @@
   "name": "scholarninja-server",
   "version": "0.0.1",
   "dependencies": {
-    "peer": "*"
+    "peer": "peers/peerjs-server"
   },
   "devDependencies": {
     "browserify": "*"
