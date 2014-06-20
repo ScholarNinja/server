@@ -1,3 +1,9 @@
+# Warning: Alpha software.
+
+# What is it?
+
+This is the server that the Scholar Ninja extension connects to for signaling, i.e. forming WebRTC connections.
+
 # Install node
 
 ```
@@ -9,7 +15,7 @@ yum install make
 sudo make install
 ```
 
-# Clone repository and install dependencies
+# Clone and install dependencies
 
 ```
 git clone git@github.com:ScholarNinja/server.git
