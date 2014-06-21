@@ -36,11 +36,13 @@ server._app.pre(function(req, res, next) {
 // Returns array of peer ids, e.g. ['peer1','peer2']
 var http = require('http');
 http.createServer(function (req, res) {
-  res.writeHead(200, {'Content-Type': 'application/json'});
+  res.writeHead(200, {
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*'
+  });
   if(server._clients.peerjs) {
     res.end(JSON.stringify(Object.keys(server._clients.peerjs)));
   } else {
     res.end(JSON.stringify([]));
   }
 }).listen(9001);
-
