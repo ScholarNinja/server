@@ -12,21 +12,21 @@ var networkCheckers = {};
 var lastSeens = {}
 
 var networkCheck = function (id) {
-  if(lastSeens.id < Date.now - 60000) {
+  console.log('Network check', id);
+  if(lastSeens.id < Date.now() - 60000) {
     server.removePeer(id, 'peerjs');
   }
 }
-
 
 server.on('connection', function(id) {
   log('Connected:', id );
   // Check if node is accessible every minute
   server._clients.peerjs[id].socket.on('message', function(data) {
     if(data === 'HELLO') {
-      lastSeens.id = Date.now;
+      lastSeens.id = Date.now();
     }
   });
-  networkCheckers.id = setInterval(networkCheck(id), 6000)
+  networkCheckers.id = setInterval(networkCheck, 6000, id);
   logNumberOfPeers();
 });
 
