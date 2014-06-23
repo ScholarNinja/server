@@ -8,13 +8,22 @@ var log = function() {
 
 log('Hello. This is Scholar Ninja server.');
 
+var networkCheckers = {};
+
+var networkCheck = function (id) {
+  debugger;
+}
+
 server.on('connection', function(id) {
   log('Connected:', id );
+  // Check if node is accessible every minute
+  networkCheckers.id = setInterval(networkCheck(id), 6000)
   logNumberOfPeers();
 });
 
 server.on('disconnect', function(id) {
   log('Disconnected:', id );
+  clearInterval(networkCheckers.id);
   logNumberOfPeers();
 });
 
