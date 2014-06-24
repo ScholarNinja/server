@@ -8,13 +8,40 @@ var log = function() {
 
 log('Hello. This is Scholar Ninja server.');
 
+var networkCheckers = {};
+var lastSeens = {}
+
+var config = {
+  maxNoHelloTime: 60000,
+  networkCheckInterval: 30000
+}
+
+var networkCheck = function (id) {
+  console.log('Network check', id);
+  // Remove peer if they haven't contacted in server in 1 minute.
+  if(lastSeens.id < Date.now() - config.maxNoHelloTime) {
+    server._clients.peerjs[id].socket.close();
+    server._removePeer(id, 'peerjs');
+  }
+}
+
 server.on('connection', function(id) {
   log('Connected:', id );
+  lastSeens.id = Date.now();
+  // Check if node is accessible every minute
+  server._clients.peerjs[id].socket.on('message', function(data) {
+    if(JSON.parse(data).type === 'HELLO') {
+      console.log('Peer', id, 'says HELLO.');
+      lastSeens.id = Date.now();
+    }
+  });
+  networkCheckers.id = setInterval(networkCheck, config.networkCheckInterval, id);
   logNumberOfPeers();
 });
 
 server.on('disconnect', function(id) {
   log('Disconnected:', id );
+  clearInterval(networkCheckers.id);
   logNumberOfPeers();
 });
 
