@@ -20,8 +20,15 @@ var networkCheck = function (id) {
   console.log('Network check', id);
   // Remove peer if they haven't contacted in server in 1 minute.
   if(lastSeens.id < Date.now() - config.maxNoHelloTime) {
-    server._clients.peerjs[id].socket.close();
-    server._removePeer(id, 'peerjs');
+    try {
+      if(server._clients.peerjs[id]) {
+        server._clients.peerjs[id].socket.close();
+      }
+      server._removePeer(id, 'peerjs');
+    }
+    catch(e) {
+      log(e)
+    }
   }
 }
 
