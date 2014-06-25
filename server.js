@@ -13,7 +13,7 @@ var lastSeens = {}
 
 var config = {
   maxNoHelloTime: 60000,
-  networkCheckInterval: 55000
+  networkCheckInterval: 30000
 }
 
 var networkCheck = function (id) {
