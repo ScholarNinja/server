@@ -1,5 +1,5 @@
 var PeerServer = require('peer').PeerServer;
-var server = new PeerServer({port: 9000, path: '/', allow_discovery: true});
+var server = new PeerServer({port: 9002, path: '/', allow_discovery: true});
 
 var log = function() {
   var message = Array.prototype.slice.call(arguments).join(' ');
@@ -13,7 +13,7 @@ var lastSeens = {}
 
 var config = {
   maxNoHelloTime: 60000,
-  networkCheckInterval: 30000
+  networkCheckInterval: 55000
 }
 
 var networkCheck = function (id) {
