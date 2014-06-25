@@ -25,6 +25,7 @@ var networkCheck = function (id) {
         server._clients.peerjs[id].socket.close();
       }
       server._removePeer(id, 'peerjs');
+      clearInterval(networkCheckers.id);
     }
     catch(e) {
       log(e)
