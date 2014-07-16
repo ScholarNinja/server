@@ -1,2 +1,4 @@
 node_modules/
 logs/
+*.sublime-project
+*.sublime-workspace
