@@ -14,7 +14,7 @@ function compact(array) {
 
   while (++index < length) {
     var value = array[index];
-    if (value) {
+    if (value && value !== 'undefined') {
       result.push(value);
     }
   }
