@@ -6,6 +6,21 @@ var log = function() {
   console.log(new Date().toISOString(), message);
 }
 
+// From lodash
+function compact(array) {
+  var index = -1,
+      length = array ? array.length : 0,
+      result = [];
+
+  while (++index < length) {
+    var value = array[index];
+    if (value) {
+      result.push(value);
+    }
+  }
+  return result;
+}
+
 log('Hello. This is Scholar Ninja server.');
 
 server.on('connection', function(id) {
@@ -41,7 +56,7 @@ http.createServer(function (req, res) {
     'Access-Control-Allow-Origin': '*'
   });
   if(server._clients.peerjs) {
-    res.end(JSON.stringify(Object.keys(server._clients.peerjs)));
+    res.end(JSON.stringify(compact(Object.keys(server._clients.peerjs))));
   } else {
     res.end(JSON.stringify([]));
   }
